@@ -1,0 +1,8 @@
+[package]
+name = "zwovieracht"
+version = "0.1.0"
+authors = ["ah"]
+
+[dependencies]
+rand = "*"
+termion = "*"
