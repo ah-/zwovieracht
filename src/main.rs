@@ -55,7 +55,7 @@ fn main() {
         };
 
         if let Some(direction) = direction {
-            let (next, reward, done) = game.step(direction);
+            let (next, reward, done) = game.step(&direction);
             game = next;
             score += reward;
 

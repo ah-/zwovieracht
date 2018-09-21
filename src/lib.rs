@@ -34,14 +34,14 @@ impl Game {
         game
     }
 
-    pub fn step(&self, direction: Direction) -> (Game, usize, bool) {
+    pub fn step(&self, direction: &Direction) -> (Game, usize, bool) {
         let (mut next, reward) = self.shift(direction);
         next.add_number();
         let done = next.is_done();
         (next, reward, done)
     }
 
-    fn shift(&self, direction: Direction) -> (Game, usize) {
+    fn shift(&self, direction: &Direction) -> (Game, usize) {
         let mut next = Game { board: [0; 16] };
         let mut reward: usize = 0;
 
@@ -84,7 +84,7 @@ impl Game {
             Direction::Right,
             Direction::Down,
         ] {
-            if *self != self.shift(direction).0 {
+            if *self != self.shift(&direction).0 {
                 return false;
             }
         }
@@ -140,25 +140,25 @@ mod tests {
                                  2, 2, 2, 2,
                                  1, 0, 1, 0]};
 
-        assert_eq!(board.shift(Direction::Left),
+        assert_eq!(board.shift(&Direction::Left),
                    (Game{board: [1, 3, 0, 0,
                                  3, 1, 0, 0,
                                  3, 3, 0, 0,
                                  2, 0, 0, 0]}, 8 * 3 + 4));
 
-        assert_eq!(board.shift(Direction::Up),
+        assert_eq!(board.shift(&Direction::Up),
                    (Game{board: [2, 3, 1, 3,
                                  1, 0, 3, 1,
                                  0, 0, 1, 2,
                                  0, 0, 0, 0]}, 8 * 2));
 
-        assert_eq!(board.shift(Direction::Right),
+        assert_eq!(board.shift(&Direction::Right),
                    (Game{board: [0, 0, 1, 3,
                                  0, 0, 3, 1,
                                  0, 0, 3, 3,
                                  0, 0, 0, 2]}, 8 * 3 + 4));
 
-        assert_eq!(board.shift(Direction::Down),
+        assert_eq!(board.shift(&Direction::Down),
                    (Game{board: [0, 0, 0, 0,
                                  0, 0, 1, 3,
                                  2, 0, 3, 1,
@@ -169,9 +169,9 @@ mod tests {
     #[test]
     fn test_is_done() {
         assert!(!Game{board: [0, 0, 0, 0,
-                             0, 0, 1, 3,
-                             2, 0, 3, 1,
-                             1, 3, 1, 2]}.is_done());
+                              0, 0, 1, 3,
+                              2, 0, 3, 1,
+                              1, 3, 1, 2]}.is_done());
 
         assert!(Game{board: [1, 2, 1, 2,
                              2, 1, 2, 1,
