@@ -3,6 +3,15 @@ name = "zwovieracht"
 version = "0.1.0"
 authors = ["ah"]
 
+[lib]
+name = "zwovieracht"
+crate-type = ["cdylib"]
+
 [dependencies]
 rand = "*"
 termion = "*"
+numpy = "0.3"
+
+[dependencies.pyo3]
+version = "0.4"
+features = ["extension-module"]

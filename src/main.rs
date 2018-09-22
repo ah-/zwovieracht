@@ -1,8 +1,8 @@
 extern crate rand;
 extern crate termion;
 
-mod lib;
-use lib::{Direction, Game, BOARD_SIZE};
+mod game;
+use game::{Direction, Game, BOARD_SIZE};
 
 use std::io::{stdin, stdout, Write};
 use termion::event::Key;
